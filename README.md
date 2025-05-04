@@ -42,7 +42,7 @@ Plugin quản lý GiftCode cho Minecraft server, hỗ trợ tạo code, giới h
 ```bash
 /sp create VIP 10 30d  # 10 lượt dùng, hết hạn sau 30 ngày
 /sp create random 5    # Tạo 5 code ngẫu nhiên
-
+```
 Thêm whitelist:
 bash
 /sp whitelist VIP PlayerA
