@@ -1,8 +1,8 @@
 package Chanhne;
 
 import Chanhne.commands.GiftCode_Admin;
-import Chanhne.commands.GiftCode_Redeem;
-import Chanhne.commands.GiftCode_Completer;
+import Chanhne.commands.Redeem;
+import Chanhne.commands.Completer;
 import Chanhne.config.Config_GiftCode;
 import Chanhne.config.GiftCodeManager;
 import Chanhne.config.MainConfigManager;
@@ -35,7 +35,7 @@ public class Main_GiftCode extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Kiểm tra ProtocolLib
+        // ============ Kiểm tra ProtocolLib ============ 
         if (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null) {
             getLogger().severe("ProtocolLib không được cài đặt! Plugin sẽ tắt.");
             Bukkit.getPluginManager().disablePlugin(this);
@@ -43,23 +43,23 @@ public class Main_GiftCode extends JavaPlugin {
         }
         this.protocolManager = ProtocolLibrary.getProtocolManager();
 
-        // Khởi tạo config managers
+        // ============ Khởi tạo config managers ============ 
         this.mainConfigManager = new MainConfigManager(this); // Quản lý config.yml
         this.giftCodeManager = new GiftCodeManager(this);     // Quản lý giftcodes.yml
         this.configGiftCode = new Config_GiftCode(giftCodeManager);
 
-        // Khởi tạo các file cấu hình
+        // ============ Khởi tạo các file cấu hình ============
         checkAndCreateConfigs();
         saveDefaultMessages();
 
-        // Khởi tạo các thành phần khác
+        // ============ Khởi tạo các thành phần khác ============
         this.Messager = new Messager(getDataFolder());
         this.configManager = new ConfigManager(this);
         this.cooldownManager = new CooldownManager(this);
 
-        // Đăng ký lệnh
-        Objects.requireNonNull(getCommand("gc")).setExecutor(new GiftCode_Redeem(this, configGiftCode));
-        Objects.requireNonNull(getCommand("gc")).setTabCompleter(new GiftCode_Completer(configGiftCode));
+        // ============ Đăng ký lệnh ============
+        Objects.requireNonNull(getCommand("sp")).setExecutor(new Redeem(this, configGiftCode));
+        Objects.requireNonNull(getCommand("sp")).setTabCompleter(new Completer(configGiftCode));
         Objects.requireNonNull(getCommand("code")).setExecutor(new GiftCode_Admin(this, configGiftCode));
 
         // Đăng ký listener
@@ -85,16 +85,7 @@ public class Main_GiftCode extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerCommandListener(this), this);
         getServer().getPluginManager().registerEvents(new PlayerDeathListener(this), this);
     }
-
-    // ============ Getter methods ============
-    public MainConfigManager getMainConfigManager() {
-        return mainConfigManager;
-    }
-
-    public Config_GiftCode getGiftCodeConfig() {
-        return configGiftCode;
-    }
-
+    
     @Override
     public void onDisable() {
         if (cooldownManager != null) {
@@ -102,29 +93,7 @@ public class Main_GiftCode extends JavaPlugin {
         }
         getLogger().info("GiftCode Plugin disabled!");
     }
-
-    // Phương thức lấy dữ liệu từ config.yml
-    public int getCooldownSeconds() {
-        return mainConfigManager.getConfig().getInt("cooldown-seconds", 30);
-    }
-
-    public List<String> getBlockedCommands() {
-        return mainConfigManager.getConfig().getStringList("blocked-commands");
-    }
-    // Getter methods
-    public Messager getMessager() {return Messager;}
-    public ConfigManager getConfigManager() {return configManager;}
-    public ProtocolManager getProtocolManager() {return protocolManager;}
-    public CooldownManager getCooldownManager() {return cooldownManager;}
-
-    // kiểm tra và lưu file,tạo file khi còn thiếu
-    private void saveDefaultMessages() {
-        File msgFile = new File(getDataFolder(), "messages.yml");
-        if (!msgFile.exists()) {
-            saveResource("messages.yml", false);
-        }
-    }
-
+    
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Main_GiftCode plugin = (Main_GiftCode) sender.getServer().getPluginManager().getPlugin("GiftCodePlugin");
@@ -134,5 +103,41 @@ public class Main_GiftCode extends JavaPlugin {
         }
         return false;
     }
+
+    // ============ Getter methods ============
+    public Messager getMessager() {return Messager;}
+    public ConfigManager getConfigManager() {return configManager;}
+    public Config_GiftCode getGiftCodeConfig() { return configGiftCode;}
+    public ProtocolManager getProtocolManager() {return protocolManager;}
+    public CooldownManager getCooldownManager() {return cooldownManager;}
+    public MainConfigManager getMainConfigManager() { return mainConfigManager;}
+
+    // ============ Phương thức lấy dữ liệu từ config.yml ============
+    public int getCooldownSeconds() {
+        return mainConfigManager.getConfig().getInt("cooldown-seconds", 30);
+    }
+
+    public List<String> getBlockedCommands() {
+        return mainConfigManager.getConfig().getStringList("blocked-commands");
+    }
+
+    // kiểm tra và lưu file,tạo file khi còn thiếu
+    private void saveDefaultMessages() {
+        File msgFile = new File(getDataFolder(), "messages.yml");
+        if (!msgFile.exists()) {
+            saveResource("messages.yml", false);
+        }
+    }
     
+    // phương thức reload tất cả cấu hình:
+    public void reloadAllConfigs() {
+        mainConfigManager.reload();    // Reload config.yml
+        giftCodeManager.reload();      // Reload giftcodes.yml
+        Messager.reload();             // Reload messages.yml
+        configGiftCode.reload();       // Reload dữ liệu từ giftcodes.yml
+        
+        
+        // Log giá trị cooldown-seconds sau khi reload
+        getLogger().info("Reloaded cooldown-seconds: " + getCooldownSeconds());
+    }
 }

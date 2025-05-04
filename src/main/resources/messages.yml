@@ -33,3 +33,12 @@ delete_user: "§cSử dụng: /gc delete <code>"
 disable_user: "§cSử dụng: /gc disable <code>"
 plugin_user: "§cSử dụng: /gc <create|delete|reload|enable|disable|list|whitelist|permission>"
 
+help_message:
+  - "&6===== &eGiftCode Help &6====="
+  - "&a/sp create <code> [uses] [time] &7- Tạo giftcode"
+  - "&a/sp create random <số lượng> &7- Tạo giftcode ngẫu nhiên"
+  - "&a/sp delete <code> &7- Xóa giftcode"
+  - "&a/sp reload &7- Reload toàn bộ plugin"
+  - "&a/sp list &7- Xem danh sách giftcode"
+  - "&a/sp enable/disable <code> &7- Bật/tắt giftcode"
+  - "&a/sp whitelist/permission <code> <player> &7- Thêm player vào whitelist"

@@ -14,19 +14,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public class GiftCode_Redeem implements CommandExecutor {
-
+public class Redeem implements CommandExecutor {
     private final Main_GiftCode plugin;
     private final Config_GiftCode configGiftCode;
 
-    public GiftCode_Redeem(Main_GiftCode plugin, Config_GiftCode configGiftCode) {
+    public Redeem(Main_GiftCode plugin, Config_GiftCode configGiftCode) {
         this.configGiftCode = configGiftCode;
         this.plugin = plugin;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
         // Kiểm tra quyền
         if (!sender.hasPermission("SP.admin")) {
             sender.sendMessage(plugin.getMessager().get("no_permission"));
@@ -39,6 +37,12 @@ public class GiftCode_Redeem implements CommandExecutor {
         }
 
         switch (args[0].toLowerCase()) {
+            
+            case "help":
+            case "?":
+                sendHelpMessage(sender);
+                break;
+
             case "create":
                 handleCreate(sender, args);
                 break;
@@ -58,7 +62,7 @@ public class GiftCode_Redeem implements CommandExecutor {
                 break;
 
             case "reload":
-                configGiftCode.reload();
+                plugin.reloadAllConfigs();
                 sender.sendMessage(plugin.getMessager().get("reload_plugin"));
                 break;
 
@@ -101,7 +105,7 @@ public class GiftCode_Redeem implements CommandExecutor {
                     Map<String, String> placeholders = new HashMap<>();
                     placeholders.put("command", args[0]); // Thay thế %command% bằng tên lệnh thực tế
 
-                    sender.sendMessage(plugin.getMessager().get("usage_gc", placeholders));
+                    sender.sendMessage(plugin.getMessager().get("usage_sp", placeholders));
                     return true;
                 }
                 String code = args[1];
@@ -128,17 +132,13 @@ public class GiftCode_Redeem implements CommandExecutor {
                 // Gửi tin nhắn từ messages.yml
                 sender.sendMessage(plugin.getMessager().get("whitelist_added", placeholders));
                 break;
-
-            default:
-                sender.sendMessage(plugin.getMessager().get("missing_argument"));
-                break;
         }
 
         return true;
     }
 
     private void handleCreate(CommandSender sender, String[] args) {
-        // /gc create random <num>
+        // /sp create random <num>
         if (args.length >= 3 && args[1].equalsIgnoreCase("random")) {
             int num = 1;
             try {
@@ -160,7 +160,7 @@ public class GiftCode_Redeem implements CommandExecutor {
             return;
         }
 
-        // /gc create <code> [number] [time]
+        // /sp create <code> [number] [time]
         // code => tên giftcode
         // number => số lần sử dụng
         // time => dạng d/h/m => parse sang millis
@@ -197,5 +197,24 @@ public class GiftCode_Redeem implements CommandExecutor {
             sender.sendMessage(plugin.getMessager().get("giftcode_expiry", placeholders));
         }
 
+    }
+
+    private void sendHelpMessage(CommandSender sender) {
+        List<String> helpMessages = plugin.getMessager().getList("help_message");
+        if (helpMessages == null || helpMessages.isEmpty()) {
+            // Tin nhắn mặc định nếu không tìm thấy trong messages.yml
+            sender.sendMessage("§6===== &eGiftCode Help &6=====");
+            sender.sendMessage("§a/sp create <code> [uses] [time] §7- Tạo giftcode");
+            sender.sendMessage("§a/sp create random <số lượng> §7- Tạo giftcode ngẫu nhiên");
+            sender.sendMessage("§a/sp delete <code> §7- Xóa giftcode");
+            sender.sendMessage("§a/sp reload §7- Reload toàn bộ plugin");
+            sender.sendMessage("§a/sp list §7- Xem danh sách giftcode");
+            sender.sendMessage("§a/sp enable/disable <code> §7- Bật/tắt giftcode");
+            sender.sendMessage("§a/sp whitelist/permission <code> <player> §7- Thêm player vào whitelist");
+        } else {
+            for (String msg : helpMessages) {
+                sender.sendMessage(msg);
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@ package Chanhne.Messenger;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,6 +41,10 @@ public class Messager {
     // Lấy tin nhắn theo key, nếu không tìm thấy thì trả về thông báo lỗi
     public String get(String key) {
         return get(key, null);
+    }
+
+    public List<String> getList(String key) {
+        return messagesConfig.getStringList(key);
     }
 
     // Lấy tin nhắn và thay thế các placeholders nếu có

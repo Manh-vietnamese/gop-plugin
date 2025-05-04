@@ -4,10 +4,10 @@ Chanhne\utils\CooldownManager.class
 Chanhne\Messenger\Messager.class
 Chanhne\config\GiftCodeManager.class
 Chanhne\config\MainConfigManager.class
-Chanhne\commands\GiftCode_Redeem.class
 Chanhne\core\GiftCode.class
+Chanhne\commands\Redeem.class
+Chanhne\commands\Completer.class
 Chanhne\listeners\PlayerCommandListener.class
-Chanhne\commands\GiftCode_Completer.class
 Chanhne\config\Config_GiftCode.class
 Chanhne\listeners\PlayerDeathListener.class
 Chanhne\utils\ActionBarManager.class

@@ -9,19 +9,19 @@ import Chanhne.config.Config_GiftCode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GiftCode_Completer implements TabCompleter {
+public class Completer implements TabCompleter {
 
     private final Config_GiftCode configGiftCode;
 
-    public GiftCode_Completer(Config_GiftCode configGiftCode) {
+    public Completer(Config_GiftCode configGiftCode) {
         this.configGiftCode = configGiftCode;
     }
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 
-        // Nếu lệnh không phải /gc thì bỏ qua
-        if (!command.getName().equalsIgnoreCase("gc")) {
+        // Nếu lệnh không phải /sp thì bỏ qua
+        if (!command.getName().equalsIgnoreCase("sp")) {
             return null;
         }
 
@@ -37,6 +37,9 @@ public class GiftCode_Completer implements TabCompleter {
             suggestions.add("list");
             suggestions.add("whitelist");
             suggestions.add("permission");
+            suggestions.add("whitelist");
+            suggestions.add("?");
+            suggestions.add("help");
             return partialMatch(suggestions, args[0]);
         }
 
