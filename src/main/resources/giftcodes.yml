@@ -1,0 +1,9 @@
+# Danh sách giftcode
+giftcodes:
+  mycode:
+    uses: 3
+    expireAt: 0
+    active: true
+    redeemedPlayers: []
+    commands: []
+    allowedPlayers: []

@@ -1,0 +1,35 @@
+# Thông báo cooldown
+cooldown-message: "§cVui lòng đợi §e%time%§c giây!"
+# Thông báo không thể dùng lệnh
+no_command: "&cBạn không thể dùng lệnh này ngay bây giờ!"
+# Thông báo reload plugin
+Plugin_reloaded: "&bPlugin đã reload thành công!"
+# Thông báo không có quyền
+no_permission: "&cBạn không có quyền sử dụng lệnh này!" 
+
+list_giftcode: "§eDanh sách giftcode:"
+reload_plugin: "§aĐã reload plugin/config."
+missing_argument: "&cBạn cần nhập đủ tham số!"
+no_giftcode: "§cBạn không thể sử dụng giftcode này! (có thể hết hạn, đã dùng, giftcode tắt, hoặc bạn không whitelist)"
+player_not_found: "&cNgười chơi '&e%player%&c' không online hoặc chưa từng vào server!"
+whitelist_added: "&aĐã thêm '&e%player%&a' vào whitelist của code '&e%code%&a'!"
+giftcode_random_created: "&aĐã tạo &e%num%&a giftcode random!"
+
+giftcode_created: "&aĐã tạo giftcode '&e%code%&a'!"
+giftcode_details: "&7- Số lần dùng: &e%uses%"
+giftcode_no_expiry: "&7- Hết hạn: &eKhông giới hạn"
+giftcode_expiry: "&7- Hết hạn lúc: &e%expiry%"
+
+usage_gc: "&cSử dụng: /gc %command% <code> <player>"
+giftcode_not_found: "&cGiftcode &e%code% &ckhông tồn tại!"
+giftcode_deleted: "&eGiftcode &e%code% &eđã hết lượt và bị xóa!"
+giftcode_redeemed: "&aBạn đã sử dụng giftcode &e%code% &athành công!"
+giftcode_enableGiftCode: "&§aĐã bật giftcode &e%code% &athành công!"
+giftcode_disableGiftCode: "&§aĐã tắt giftcode &e%code% &athành công!"
+
+code_user: "§cSử dụng: /code <mã_code>"
+enable_user: "§cSử dụng: /gc enable <code>"
+delete_user: "§cSử dụng: /gc delete <code>"
+disable_user: "§cSử dụng: /gc disable <code>"
+plugin_user: "§cSử dụng: /gc <create|delete|reload|enable|disable|list|whitelist|permission>"
+

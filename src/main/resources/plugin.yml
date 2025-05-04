@@ -1,0 +1,23 @@
+name: Support-Server
+main: Chanhne.Main_GiftCode
+version: 1.1
+api-version: 1.21
+depend: [ProtocolLib] 
+commands:
+  gc:
+    description: Quản lý GIfcode (admin)
+    usage: /gc <create|delete|reload|enable|disable|list|whitelist|permission>
+    permission: SP.admin
+    permission-message: "§cBạn không có quyền sử dụng lệnh này!"
+  supportserver:
+    description: Reload plugin configuration
+    permission: SP.admin
+    usage: /supportserver reload
+  code:
+    description: Sử dụng GIfcode (cho người chơi)
+    usage: /code <mã_code>
+
+permissions:
+  giftcode.admin:
+    description: Admin permissions for Support Server
+    default: op
