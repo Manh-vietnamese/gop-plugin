@@ -46,6 +46,7 @@ Plugin quản lý GiftCode cho Minecraft server, hỗ trợ tạo code, giới h
 Thêm whitelist:
 bash
 /sp whitelist VIP PlayerA
+
 ❓ FAQ
 Lỗi "No permission": Cấp quyền SP.admin hoặc SP.use.
 
