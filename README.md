@@ -47,17 +47,14 @@ Thêm whitelist:
 bash
 /sp whitelist VIP PlayerA
 
-❓ FAQ
-Lỗi "No permission": Cấp quyền SP.admin hoặc SP.use.
+## ❓ FAQ
+1. Lỗi "No permission": Cấp quyền SP.admin hoặc SP.use.
+2. Giftcode không hoạt động: Kiểm tra trạng thái bằng `/sp list` và dùng `/sp enable <code>`.
+2. Thời gian hết hạn: Định dạng d (ngày), h (giờ), m (phút). Ví dụ: 7d12h.
+## 🌐 Wiki & Hỗ trợ
+- Xem chi tiết tại Wiki.
 
-Giftcode không hoạt động: Kiểm tra trạng thái bằng /sp list và dùng /sp enable <code>.
+- Báo lỗi: Issues.
 
-Thời gian hết hạn: Định dạng d (ngày), h (giờ), m (phút). Ví dụ: 7d12h.
-
-🌐 Wiki & Hỗ trợ
-Xem chi tiết tại Wiki.
-
-Báo lỗi: Issues.
-
-🛠️ Tác giả
-Plugin được phát triển bởi Chanhne. Liên hệ: contact@example.com.
+## 🛠️ Tác giả
+- Plugin được phát triển bởi Chanhne. Liên hệ: contact@example.com.
